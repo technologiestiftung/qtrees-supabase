@@ -1,22 +1,34 @@
 {
   "workbench.colorCustomizations": {
-    "activityBar.activeBackground": "#fb96ba",
-    "activityBar.activeBorder": "#2f7b05",
-    "activityBar.background": "#fb96ba",
+    "activityBar.activeBackground": "#3bdb69",
+    "activityBar.activeBorder": "#835de1",
+    "activityBar.background": "#3bdb69",
     "activityBar.foreground": "#15202b",
     "activityBar.inactiveForeground": "#15202b99",
-    "activityBarBadge.background": "#2f7b05",
+    "activityBarBadge.background": "#835de1",
     "activityBarBadge.foreground": "#e7e7e7",
-    "sash.hoverBorder": "#fb96ba",
-    "statusBar.background": "#f9659a",
+    "sash.hoverBorder": "#3bdb69",
+    "statusBar.background": "#23c050",
     "statusBar.foreground": "#15202b",
-    "statusBarItem.hoverBackground": "#f7347a",
-    "statusBarItem.remoteBackground": "#f9659a",
+    "statusBarItem.hoverBackground": "#1b953e",
+    "statusBarItem.remoteBackground": "#23c050",
     "statusBarItem.remoteForeground": "#15202b",
-    "titleBar.activeBackground": "#f9659a",
+    "titleBar.activeBackground": "#23c050",
     "titleBar.activeForeground": "#15202b",
-    "titleBar.inactiveBackground": "#f9659a99",
+    "titleBar.inactiveBackground": "#23c05099",
     "titleBar.inactiveForeground": "#15202b99"
   },
-  "peacock.color": "#f9659a"
+  "peacock.color": "#23c050",
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "askForPassword": true,
+      "driver": "PostgreSQL",
+      "name": "local supabase",
+      "group": "qtrees",
+      "connectString": "postgresql://postgres:postgres@localhost:54322/postgres"
+    }
+  ]
 }
