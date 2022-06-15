@@ -1,11 +1,37 @@
+@anon_key = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24ifQ.625_WdcF3KHqz5amU0x2X5WWHP-OEs_4qj0ssLNHzTs
+@user = me@email.com
+@password = 123456
+
+# this will change login or signup
+@access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNjU1MzEwNzE1LCJzdWIiOiJkZWRiNjFjOC1iZWYwLTQ4ZTYtODg3Yy1lNjVmMzM1Y2QzMjQiLCJlbWFpbCI6Im1lQGVtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnt9LCJyb2xlIjoiYXV0aGVudGljYXRlZCJ9.XZpSIALE171B6pVAXHYpgJTvnF9o9oHWW0iH37aEFnE
+
+@user_id = dedb61c8-bef0-48e6-887c-e65f335cd324
+
+### SIGNUP
 
 POST http://localhost:54321/auth/v1/signup
 Content-Type: application/json
-apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24ifQ.625_WdcF3KHqz5amU0x2X5WWHP-OEs_4qj0ssLNHzTs
+apikey: {{anon_key}}
 
 {
-  "email": "me@email.com",
-  "password": "123456"
-}'
+  "email": "{{user}}",
+  "password": "{{password}}"
+}
 
-###
+### LOGIN
+
+POST http://localhost:54321/auth/v1/token?grant_type=password
+Content-Type: application/json
+apikey: {{anon_key}}
+
+{
+  "email": "{{user}}",
+  "password": "{{password}}"
+}
+
+### invoke function
+
+POST http://localhost:54321/functions/v1/trees?limit=100
+Content-Type: application/json
+apikey: {{anon_key}}
+Authorization: Bearer {{access_token}}

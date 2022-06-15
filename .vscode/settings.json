@@ -30,5 +30,8 @@
       "group": "qtrees",
       "connectString": "postgresql://postgres:postgres@localhost:54322/postgres"
     }
-  ]
+  ],
+  "deno.enable": true,
+  "deno.lint": true,
+  "deno.unstable": true
 }
