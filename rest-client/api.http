@@ -7,10 +7,10 @@
 
 @user_id = bbb166b7-a460-4536-892a-327985f7d416
 
-@ml_pgrest_host = {{$dotenv ML_PGREST_HOST }}
-@ml_pgrest_user = {{$dotenv ML_PGREST_USER }}
-@ml_pgrest_password = {{$dotenv ML_PGREST_PASSWORD }}
-@ml_pgrest_port= {{$dotenv ML_PGREST_PORT }}
+@ml_pgrest_host = {{$dotenv %ML_PGREST_HOST }}
+@ml_pgrest_user = {{$dotenv %ML_PGREST_USER }}
+@ml_pgrest_password = {{$dotenv %ML_PGREST_PASSWORD }}
+@ml_pgrest_port = {{$dotenv %ML_PGREST_PORT }}
 
 ### SIGNUP
 
@@ -49,7 +49,7 @@ apikey: {{anon_key}}
 Authorization: Bearer {{access_token}}
 
 ### invoke function get join forcast
-POST http://localhost:54321/functions/v1/trees?select=forecast(baum_id)
+POST http://localhost:54321/functions/v1/trees?limit=100&select=forecast(baum_id)
 Content-Type: application/json
 apikey: {{anon_key}}
 Authorization: Bearer {{access_token}}
@@ -60,5 +60,5 @@ Authorization: Bearer {{access_token}}
 
 ### get all trees
 
-GET {{ml_pgrest_host}}:{{ml_pgrest_port}}/trees?limit=100
+GET {{ml_pgrest_host}}:{{ml_pgrest_port}}/trees?limit=100&select=forecast(baum_id)
 Content-Type: application/json
