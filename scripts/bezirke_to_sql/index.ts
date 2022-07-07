@@ -9,7 +9,7 @@ const values = json.features.map((feature) => {
   const randIndex = (Math.floor(
     Math.random() * 7,
   ));
-  const daysMap = new Map()
+  const daysMap = new Map();
   const days = [
     "Sunday",
     "Monday",
@@ -19,9 +19,11 @@ const values = json.features.map((feature) => {
     "Friday",
     "Saturday",
   ];
-  return `('${days[randIndex]
-    } ${feature.properties.Gemeinde_name}', ST_GeomFromGeoJSON ('${JSON.stringify(feature.geometry)
-    }'), '0 8 * * ${randIndex}', (
+  return `('${
+    days[randIndex]
+  } ${feature.properties.Gemeinde_name}', ST_GeomFromGeoJSON ('${
+    JSON.stringify(feature.geometry)
+  }'), '0 8 * * ${randIndex}', (
     SELECT
       id
     FROM
@@ -33,7 +35,8 @@ const values = json.features.map((feature) => {
 });
 
 const statement =
-  `INSERT INTO public.subscriptions (description, geom, cron, profile_id) VALUES ${values.join(",")
+  `INSERT INTO public.subscriptions (description, geom, cron, profile_id) VALUES ${
+    values.join(",")
   };`;
 // console.log(statement);
 
