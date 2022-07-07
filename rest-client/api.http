@@ -3,9 +3,14 @@
 @password = 123456
 
 # this will change login or signup
-@access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNjU1MzEwNzE1LCJzdWIiOiJkZWRiNjFjOC1iZWYwLTQ4ZTYtODg3Yy1lNjVmMzM1Y2QzMjQiLCJlbWFpbCI6Im1lQGVtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnt9LCJyb2xlIjoiYXV0aGVudGljYXRlZCJ9.XZpSIALE171B6pVAXHYpgJTvnF9o9oHWW0iH37aEFnE
+@access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNjU3MTk1NzY4LCJzdWIiOiJiYmIxNjZiNy1hNDYwLTQ1MzYtODkyYS0zMjc5ODVmN2Q0MTYiLCJlbWFpbCI6Im1lQGVtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnt9LCJyb2xlIjoiYXV0aGVudGljYXRlZCJ9.XwNPxdqGKskfyB1yp7Q5Z_g4XzI6yugFN6BTMI6fO1s
 
-@user_id = dedb61c8-bef0-48e6-887c-e65f335cd324
+@user_id = bbb166b7-a460-4536-892a-327985f7d416
+
+@ml_pgrest_host = {{$dotenv ML_PGREST_HOST }}
+@ml_pgrest_user = {{$dotenv ML_PGREST_USER }}
+@ml_pgrest_password = {{$dotenv ML_PGREST_PASSWORD }}
+@ml_pgrest_port= {{$dotenv ML_PGREST_PORT }}
 
 ### SIGNUP
 
@@ -29,9 +34,31 @@ apikey: {{anon_key}}
   "password": "{{password}}"
 }
 
-### invoke function
+### invoke function get 100 trees
 
 POST http://localhost:54321/functions/v1/trees?limit=100
 Content-Type: application/json
 apikey: {{anon_key}}
 Authorization: Bearer {{access_token}}
+
+### invoke function get specific tree
+
+POST http://localhost:54321/functions/v1/trees?gml_id=eq.s_wfs_baumbestand_an.00008100:00283c82
+Content-Type: application/json
+apikey: {{anon_key}}
+Authorization: Bearer {{access_token}}
+
+### invoke function get join forcast
+POST http://localhost:54321/functions/v1/trees?select=forecast(baum_id)
+Content-Type: application/json
+apikey: {{anon_key}}
+Authorization: Bearer {{access_token}}
+
+
+############## ML pgrest
+
+
+### get all trees
+
+GET {{ml_pgrest_host}}:{{ml_pgrest_port}}/trees?limit=100
+Content-Type: application/json
