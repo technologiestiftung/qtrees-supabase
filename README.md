@@ -85,7 +85,7 @@ This project follows the
 [all-contributors](https://github.com/all-contributors/all-contributors)
 specification. Contributions of any kind welcome!
 
-## Content Licencing
+## Content Licensing
 
 Texts and content available as
 [CC BY](https://creativecommons.org/licenses/by/3.0/de/).
