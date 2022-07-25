@@ -4,23 +4,20 @@
 
 import { serve } from "./deps.ts";
 import { set_limit } from "./utils.ts";
-// import { verify } from "https://deno.land/x/djwt@v2.7/mod.ts";
+// import { supabaseClient } from "../_shared/supabase-client.ts";
 const ml_pgrest_host = Deno.env.get("ML_PGREST_HOST");
 const ml_pgrest_user = Deno.env.get("ML_PGREST_USER");
 const ml_pgrest_password = Deno.env.get("ML_PGREST_PASSWORD");
 const ml_pgrest_port = Deno.env.get("ML_PGREST_PORT");
-const jwt_secret = Deno.env.get("SB_JWT_SECRET");
-// import { supabaseClient } from "../_shared/supabase-client.ts";
 
 if (
 	ml_pgrest_host === undefined ||
 	ml_pgrest_user === undefined ||
 	ml_pgrest_password === undefined ||
-	ml_pgrest_port === undefined ||
-	jwt_secret === undefined
+	ml_pgrest_port === undefined
 ) {
 	console.error(
-		"Missing environment variables: ML_PGREST_HOST, ML_PGREST_USER, ML_PGREST_PASSWORD, ML_PGREST_PORT, JWT_SECRET",
+		"Missing environment variables: ML_PGREST_HOST, ML_PGREST_USER, ML_PGREST_PASSWORD, ML_PGREST_PORT",
 	);
 	Deno.exit(1);
 }
@@ -34,21 +31,21 @@ if (
 // 	status: 401,
 // };
 
+const corsHeaders = {
+	"Access-Control-Allow-Origin": "*",
+	"Access-Control-Allow-Headers": "authorization, x-client-info, apikey",
+};
 const body_missing_gml_id_param = JSON.stringify({
 	message: "missing gml_id search param",
 });
 const header_wrong_request = {
-	headers: { "Content-Type": "application/json" },
+	headers: { "Content-Type": "application/json", ...corsHeaders },
 	status: 400,
 };
 
 const header_internal_server_error = {
-	headers: { "Content-Type": "application/json" },
+	headers: { "Content-Type": "application/json", ...corsHeaders },
 	status: 500,
-};
-const corsHeaders = {
-	"Access-Control-Allow-Origin": "*",
-	"Access-Control-Allow-Headers": "authorization, x-client-info, apikey",
 };
 
 serve(async (req: Request) => {
@@ -112,7 +109,7 @@ serve(async (req: Request) => {
 
 		let url = new URL(req.url);
 
-		const searchParams = url.searchParams;
+		const { searchParams } = url;
 		if (
 			url.pathname.replace("/ml-api-passthrough", "") === "/trees" &&
 			!searchParams.has("gml_id")
@@ -147,15 +144,16 @@ serve(async (req: Request) => {
 			);
 			if (!paths.includes(url.pathname)) {
 				return new Response(JSON.stringify({ paths }), {
-					headers: { "Content-Type": "application/json" },
+					headers: { "Content-Type": "application/json", ...corsHeaders },
 				});
 			}
 		}
 
 		return new Response(JSON.stringify(json), {
-			headers: { "Content-Type": "application/json" },
+			headers: { "Content-Type": "application/json", ...corsHeaders },
 		});
 	} catch (error) {
+		console.error(error);
 		return new Response(
 			JSON.stringify({ message: error.message }),
 			header_internal_server_error,
