@@ -1,56 +1,24 @@
 ![](https://img.shields.io/badge/Built%20with%20%E2%9D%A4%EF%B8%8F-at%20Technologiestiftung%20Berlin-blue)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-# {repo-template}
+# QTrees Supabase
 
-<!--
-
-How to:
-
-- You dont need to use every section. Only the ones that apply to your project.
-- Adjust the files on .github/ISSUE_TEMPLATE/* how you need them
-- Adjust the file on .github/CODEOWNERS to match your team
-- If you use staging and main branches use this template for .github/renovate.json
-
-
-```json
-{
-   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "@inpyjamas"
-  ],
-    "baseBranches": [
-    "staging"
-  ]
-}
-```
-
-Bonus:
-
-Use all-contributors
-
-npx all-contributors-cli check
-npx all-contributors-cli add ff6347 doc
-
-You can use it on GitHub just by commeting on PRs and issues:
-
-```
-@all-contributors please add @ff6347 for infrastructure, tests and code
-```
-Read more here https://allcontributors.org/
-
-
-Get fancy shields at https://shields.io
- -->
-
-Add your project description here
+This is the Supabase setup for the QTrees project.
 
 ## Prerequisites
 
+- supabase account
+- supabase cli
+
 ## Installation
+
+git clone <repository>
+cd <repository>
 
 ## Usage or Deployment
 
@@ -62,7 +30,8 @@ Add your project description here
 
 ## Contributors
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+Thanks goes to these wonderful people
+([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -80,11 +49,14 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+This project follows the
+[all-contributors](https://github.com/all-contributors/all-contributors)
+specification. Contributions of any kind welcome!
 
-## Content Licencing
+## Content Licensing
 
-Texts and content available as [CC BY](https://creativecommons.org/licenses/by/3.0/de/).
+Texts and content available as
+[CC BY](https://creativecommons.org/licenses/by/3.0/de/).
 
 Illustrations by Maria Musterfrau, all rights reserved.
 
