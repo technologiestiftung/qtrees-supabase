@@ -8,23 +8,61 @@
 
 # QTrees Supabase
 
-This is the Supabase setup for the QTrees project.
+This is the Supabase.com setup for the QTrees project. It uses edge functions to pass requests through to another API created using [Postgrest](https://postgrest.org/en/stable/). Since this API is not public and there are no docs for it you won't be able to use the edge functions from this repo.
 
 ## Prerequisites
 
 - supabase account
 - supabase cli
+- Secondary API and Database (out of scope for these docs)
 
 ## Installation
 
+```bash
 git clone <repository>
-cd <repository>
+```
 
-## Usage or Deployment
+## Deployment
+
+Before you can deploy the project to the Supabase.com, you need to:
+
+- Login using the supabase cli
+- Create a new project using the supabase dashboard
+- Enable `postgis` and `moddatetime` in the dashboard for your database
+- Obtain you project ref/id (find it in the URL)
+- Obtain your project database url (looks like this `postgresql://postgres:[YOUR-PASSWORD]@db.[abcdefghijklmnopqrst].supabase.co:5432/postgres`)
+- Create two copies of .env.defaults and name them `.env` and `.env.local` and fill in the blanks
+
+```bash
+cd <repository>
+supabase link --project-ref <abcdefghijklmnopqrst>
+supabase db remote set <remote database connection url>
+supabase db push # [--dry-run]
+supabase functions deply ml-api-passthrough
+```
 
 ## Development
 
+```bash
+cd <repository>
+supabase start
+supabase functions serve ml-api-passthrough --env-file ./supabase/.env.local
+```
+
+### Make requests to the passthrough API
+
+- Fill in your anon token
+- Fill in your project ref
+
+Hint: Requests without `gml_id` searchParams are rejected.
+
+```bash
+curl -L -X POST 'https://[abcdefghijklmnopqrst].functions.supabase.co/ml-api-passthrough/trees?gml_id=eq.1' -H 'Authorization: Bearer [YOUR ANON KEY]'
+```
+
 ## Tests
+
+None yet :(
 
 ## Contributing
 
