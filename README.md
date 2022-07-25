@@ -6,51 +6,19 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-# {repo-template}
+# QTrees Supabase
 
-<!--
-
-How to:
-
-- You dont need to use every section. Only the ones that apply to your project.
-- Adjust the files on .github/ISSUE_TEMPLATE/* how you need them
-- Adjust the file on .github/CODEOWNERS to match your team
-- If you use staging and main branches use this template for .github/renovate.json
-
-```json
-{
-   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "@inpyjamas"
-  ],
-    "baseBranches": [
-    "staging"
-  ]
-}
-```
-
-Bonus:
-
-Use all-contributors
-
-npx all-contributors-cli check
-npx all-contributors-cli add ff6347 doc
-
-You can use it on GitHub just by commeting on PRs and issues:
-
-```
-@all-contributors please add @ff6347 for infrastructure, tests and code
-```
-Read more here https://allcontributors.org/
-
-Get fancy shields at https://shields.io
- -->
-
-Add your project description here
+This is the Supabase setup for the QTrees project.
 
 ## Prerequisites
 
+- supabase account
+- supabase cli
+
 ## Installation
+
+git clone <repository>
+cd <repository>
 
 ## Usage or Deployment
 
