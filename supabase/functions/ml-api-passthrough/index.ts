@@ -4,6 +4,7 @@
 
 import { serve } from "./deps.ts";
 import { set_limit } from "./utils.ts";
+import client from "../_shared/db.ts";
 // import { supabaseClient } from "../_shared/supabase-client.ts";
 const ml_pgrest_host = Deno.env.get("ML_PGREST_HOST");
 const ml_pgrest_user = Deno.env.get("ML_PGREST_USER");
@@ -25,11 +26,11 @@ if (
 // const body_internal_server_error = JSON.stringify({
 // 	message: "internal server error",
 // });
-// const body_not_authorized = JSON.stringify({ message: "Not authorized" });
-// const header_not_authorized = {
-// 	headers: { "Content-Type": "application/json" },
-// 	status: 401,
-// };
+const body_not_authorized = JSON.stringify({ message: "Not authorized" });
+const header_not_authorized = {
+	headers: { "Content-Type": "application/json" },
+	status: 401,
+};
 
 const corsHeaders = {
 	"Access-Control-Allow-Origin": "*",
@@ -37,6 +38,9 @@ const corsHeaders = {
 };
 const body_missing_gml_id_param = JSON.stringify({
 	message: "missing gml_id search param",
+});
+const body_missing_baum_id_param = JSON.stringify({
+	message: "missing baum_id search param",
 });
 const header_wrong_request = {
 	headers: { "Content-Type": "application/json", ...corsHeaders },
@@ -54,7 +58,19 @@ serve(async (req: Request) => {
 		if (req.method === "OPTIONS") {
 			return new Response("ok", { headers: corsHeaders });
 		}
-
+		await client.connect();
+		const object_result = await client.queryObject<{ login: string }>({
+			text: "SELECT api.login($user,$pass)",
+			args: { user: ml_pgrest_user, pass: ml_pgrest_password },
+		});
+		await client.end();
+		if (object_result.rows.length === 0) {
+			return new Response(body_not_authorized, header_not_authorized);
+		}
+		const token = object_result.rows[0].login.substring(
+			1,
+			object_result.rows[0].login.length - 1,
+		);
 		/*
   // This block of code adds auth using supabase js sdk
   // not needed right now but good to keep around for the next iteration
@@ -110,12 +126,32 @@ serve(async (req: Request) => {
 		let url = new URL(req.url);
 
 		const { searchParams } = url;
-		if (
-			url.pathname.replace("/ml-api-passthrough", "") === "/trees" &&
-			!searchParams.has("gml_id")
-		) {
-			return new Response(body_missing_gml_id_param, header_wrong_request);
+
+		switch (url.pathname.replace("/ml-api-passthrough", "")) {
+			case "/trees": {
+				if (!searchParams.has("gml_id")) {
+					return new Response(body_missing_gml_id_param, header_wrong_request);
+				}
+				break;
+			}
+			case "/forecast":
+			case "/nowcast": {
+				if (!searchParams.has("baum_id")) {
+					return new Response(body_missing_baum_id_param, header_wrong_request);
+				}
+				break;
+			}
+
+			default: {
+				break;
+			}
 		}
+		// if (
+		// 	url.pathname.replace("/ml-api-passthrough", "") === "/trees" &&
+		// 	!searchParams.has("gml_id")
+		// ) {
+		// 	return new Response(body_missing_gml_id_param, header_wrong_request);
+		// }
 		url = set_limit(url, 100_000);
 
 		const target_url = `${ml_pgrest_host}:${ml_pgrest_port}${url.pathname.replace(
@@ -123,7 +159,9 @@ serve(async (req: Request) => {
 			"",
 		)}${url.search}`;
 
-		const res = await fetch(target_url);
+		const res = await fetch(target_url, {
+			headers: { Authorization: `Bearer ${token}` },
+		});
 
 		if (!res.ok) {
 			const message = await res.text();
