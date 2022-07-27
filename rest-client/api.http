@@ -11,6 +11,7 @@
 @ml_pgrest_user = {{$dotenv %ML_PGREST_USER }}
 @ml_pgrest_password = {{$dotenv %ML_PGREST_PASSWORD }}
 @ml_pgrest_port = {{$dotenv %ML_PGREST_PORT }}
+@ml_pgrest_token = {{$dotenv %ML_PGREST_TOKEN }}
 
 ### SIGNUP
 
@@ -58,7 +59,21 @@ Authorization: Bearer {{access_token}}
 ############## ML pgrest
 
 
+### login
+
+GET {{ml_pgrest_host}}:{{ml_pgrest_port}}/rpc/login
+Content-Type: application/json
+
+{"email": "{{ml_pgrest_user}}", "password": "{{ml_pgrest_password}}"}
+
+
+
 ### get all trees
 
-GET {{ml_pgrest_host}}:{{ml_pgrest_port}}/trees?limit=100&select=forecast(baum_id)
+GET {{ml_pgrest_host}}:{{ml_pgrest_port}}/nowcast?limit=100
 Content-Type: application/json
+Authorization: Bearer {{ml_pgrest_token}}
+
+
+
+
