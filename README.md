@@ -51,13 +51,53 @@ supabase functions serve ml-api-passthrough --env-file ./supabase/.env.local
 
 ### Make requests to the passthrough API
 
+The passthrough API is a simple proxy that passes requests to the secondary API. The secondary API is a [Postgrest](https://postgrest.org/en/stable/) instance that is connected to the trees database. All Postgrest filters and queries are passed through to the secondary API. Even though you actually would make a GET request, it is a restriction of the Supabase edge functions that you can only make POST and OPTIONS requests.
+
+Todo:
+
 - Fill in your anon token
 - Fill in your project ref
 
-Hint: Requests without `gml_id` searchParams are rejected.
+For the `/trees` route/table requests without `gml_id` searchParams are rejected.
 
 ```bash
 curl -L -X POST 'https://[abcdefghijklmnopqrst].functions.supabase.co/ml-api-passthrough/trees?gml_id=eq.1' -H 'Authorization: Bearer [YOUR ANON KEY]'
+```
+
+Or with Javascript:
+
+```js
+{
+	async function main() {
+		const gml_id = "[SOME GML ID]";
+		const anon_token = "[YOUR ANON KEY]";
+
+		const response = await fetch(
+			`<https://[abcdefghijklmnopqrst].functions.supabase.co/ml-api-passthrough/trees?gml_id=eq.${gml_id}`,
+			{
+				method: "POST",
+				headers: {
+					Authorization: `Bearer ${anon_token}`,
+				},
+			},
+		);
+		if (!response.ok) {
+			const txt = await response.text();
+			console.error(txt);
+			throw new Error(txt);
+		}
+		const json = await response.json();
+		return json;
+	}
+
+	main().then(console.log).catch(console.error);
+}
+```
+
+For the nowcast and forcast routes/tables you will have to pass a `baum_id` with each request.
+
+```bash
+curl -L -X POST 'https://[abcdefghijklmnopqrst].functions.supabase.co/ml-api-passthrough/nowcast?baum_id=eq.1' -H 'Authorization: Bearer [YOUR ANON KEY]'
 ```
 
 ## Tests
