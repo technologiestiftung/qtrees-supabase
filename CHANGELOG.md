@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/technologiestiftung/qtrees-supabase/compare/v1.0.0...v1.1.0) (2022-08-17)
+
+
+### Features
+
+* Add issues schema and bucket ([c428af6](https://github.com/technologiestiftung/qtrees-supabase/commit/c428af6baa74a81068255fe7484ce9566cd98c02))
+
 # [1.1.0-staging.1](https://github.com/technologiestiftung/qtrees-supabase/compare/v1.0.0...v1.1.0-staging.1) (2022-08-17)
 
 
