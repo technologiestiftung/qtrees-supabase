@@ -1,7 +1,7 @@
 module.exports = {
 	branches: [
 		{ name: "main" },
-		{ name: "staging", channel: "pre/rc", prerelease: "rc" }, // `prerelease` is built with the template `${name.replace(/^pre\\//g, "")}`
+		{ name: "staging", prerelease: true }, // `prerelease` is built with the template `${name.replace(/^pre\\//g, "")}`
 	],
 	npmPublish: false,
 	dryRun: false,
