@@ -38,7 +38,7 @@ cd <repository>
 supabase link --project-ref <abcdefghijklmnopqrst>
 supabase db remote set <remote database connection url>
 supabase db push # [--dry-run]
-supabase functions deply ml-api-passthrough
+supabase functions deploy ml-api-passthrough
 ```
 
 ## Development
