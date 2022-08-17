@@ -11,18 +11,6 @@ const ml_pgrest_user = Deno.env.get("ML_PGREST_USER");
 const ml_pgrest_password = Deno.env.get("ML_PGREST_PASSWORD");
 const ml_pgrest_port = Deno.env.get("ML_PGREST_PORT");
 
-if (
-	ml_pgrest_host === undefined ||
-	ml_pgrest_user === undefined ||
-	ml_pgrest_password === undefined ||
-	ml_pgrest_port === undefined
-) {
-	console.error(
-		"Missing environment variables: ML_PGREST_HOST, ML_PGREST_USER, ML_PGREST_PASSWORD, ML_PGREST_PORT",
-	);
-	Deno.exit(1);
-}
-
 // const body_internal_server_error = JSON.stringify({
 // 	message: "internal server error",
 // });
@@ -54,6 +42,18 @@ const header_internal_server_error = {
 
 serve(async (req: Request) => {
 	try {
+		if (
+			ml_pgrest_host === undefined ||
+			ml_pgrest_user === undefined ||
+			ml_pgrest_password === undefined ||
+			ml_pgrest_port === undefined
+		) {
+			const message =
+				"Missing environment variables: ML_PGREST_HOST, ML_PGREST_USER, ML_PGREST_PASSWORD, ML_PGREST_PORT";
+			console.error(message);
+			throw new Error(message);
+		}
+
 		// This is needed if you're planning to invoke your function from a browser.
 		if (req.method === "OPTIONS") {
 			return new Response("ok", { headers: corsHeaders });
