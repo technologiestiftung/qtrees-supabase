@@ -1,6 +1,6 @@
 # A string used to distinguish different Supabase projects on the same host. Defaults to the working
 # directory name when running `supabase init`.
-project_id = "qtrees-backend"
+project_id = "qtrees-supabase"
 
 [api]
 # Port to use for the API URL.
@@ -30,6 +30,8 @@ port = 54323
 [inbucket]
 # Port to use for the email testing server web interface.
 port = 54324
+smtp_port = 54325
+pop3_port = 54326
 
 [auth]
 # The base URL of your website. Used as an allow-list for redirects and for constructing URLs used
@@ -41,11 +43,11 @@ additional_redirect_urls = ["https://localhost:3000"]
 # week).
 jwt_expiry = 3600
 # Allow/disallow new user signups to your project.
-enable_signup = true
+enable_signup = false
 
 [auth.email]
 # Allow/disallow new user signups via email to your project.
-enable_signup = true
+enable_signup = false
 # If enabled, a user will be required to confirm any email change on both the old, and new email
 # addresses. If disabled, only the new email is required to confirm.
 double_confirm_changes = true
