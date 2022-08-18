@@ -1,3 +1,16 @@
+# [1.2.0-staging.1](https://github.com/technologiestiftung/qtrees-supabase/compare/v1.1.0...v1.2.0-staging.1) (2022-08-18)
+
+
+### Bug Fixes
+
+* RLS on issues ([a41035a](https://github.com/technologiestiftung/qtrees-supabase/commit/a41035a41fdd29414cd114992d41ccc7e3d8f688))
+* **semantic release:** Change config to be cjs ([1e1cdd6](https://github.com/technologiestiftung/qtrees-supabase/commit/1e1cdd62d112e8d17c08537a05d646e3536dd76f))
+
+
+### Features
+
+* Enable insert on issues for anon users ([2fe6ca7](https://github.com/technologiestiftung/qtrees-supabase/commit/2fe6ca709a9646f96c32b0842664c23c3b2a3ade))
+
 # [1.1.0](https://github.com/technologiestiftung/qtrees-supabase/compare/v1.0.0...v1.1.0) (2022-08-17)
 
 
