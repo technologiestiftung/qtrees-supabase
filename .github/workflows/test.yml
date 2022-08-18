@@ -19,10 +19,16 @@ jobs:
     if: "!contains(github.event.head_commit.message, 'skip ci')"
     steps:
       - uses: actions/checkout@v3
-
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "lts/*"
+      - name: Install dependencies
+        run: npm ci
       - uses: supabase/setup-cli@v1
         with:
           version: 1.0.3
       - run: |
           supabase start
+          npm run test:run
           supabase stop
