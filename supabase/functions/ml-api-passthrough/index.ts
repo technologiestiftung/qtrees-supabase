@@ -5,6 +5,7 @@
 import { serve } from "./deps.ts";
 import { set_limit } from "./utils.ts";
 import client from "../_shared/db.ts";
+import { corsHeaders } from "../_shared/cors.ts";
 // import { supabaseClient } from "../_shared/supabase-client.ts";
 const ml_pgrest_host = Deno.env.get("ML_PGREST_HOST");
 const ml_pgrest_user = Deno.env.get("ML_PGREST_USER");
@@ -20,10 +21,8 @@ const header_not_authorized = {
 	status: 401,
 };
 
-const corsHeaders = {
-	"Access-Control-Allow-Origin": "*",
-	"Access-Control-Allow-Headers": "authorization, x-client-info, apikey",
-};
+corsHeaders["Access-Control-Allow-Origin"] = "*";
+
 const body_missing_gml_id_param = JSON.stringify({
 	message: "missing gml_id search param",
 });
