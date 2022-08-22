@@ -8,7 +8,6 @@ describe("suite name", () => {
 		const { data: issues, error } = await supabase
 			.from<Issues>("issues")
 			.select("*");
-		console.info(issues);
 		expect(issues).to.toBeDefined();
 		expect(error).to.toBeNull();
 	});
@@ -22,7 +21,6 @@ describe("suite name", () => {
 		const { data: issues, error } = await supabase
 			.from<IssueInsert>("issues")
 			.insert([{ issue_type_id: issue_types![0].id, gml_id: "gml_id" }]);
-		console.error(error);
 		expect(error).not.toBeNull();
 		expect(issues).toBeNull();
 		expect(error).toMatchInlineSnapshot(`
