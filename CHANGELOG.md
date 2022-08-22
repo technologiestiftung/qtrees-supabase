@@ -1,3 +1,15 @@
+# [2.0.0-staging.1](https://github.com/technologiestiftung/qtrees-supabase/compare/v1.2.0-staging.1...v2.0.0-staging.1) (2022-08-22)
+
+
+### Features
+
+* **issues:** Remove public issue creation ([509900a](https://github.com/technologiestiftung/qtrees-supabase/commit/509900a9e8fe70704deffc67363728ea03eee2c4))
+
+
+### BREAKING CHANGES
+
+* **issues:** This will break some things in the frontend
+
 # [1.2.0-staging.1](https://github.com/technologiestiftung/qtrees-supabase/compare/v1.1.0...v1.2.0-staging.1) (2022-08-18)
 
 

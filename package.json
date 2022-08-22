@@ -1,6 +1,6 @@
 {
 	"name": "qtrees-supabase",
-	"version": "1.2.0-staging.1",
+	"version": "2.0.0-staging.1",
 	"type": "module",
 	"scripts": {
 		"test": "vitest",
