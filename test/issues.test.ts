@@ -8,12 +8,11 @@ describe("suite name", () => {
 		const { data: issues, error } = await supabase
 			.from<Issues>("issues")
 			.select("*");
-		console.info(issues);
 		expect(issues).to.toBeDefined();
 		expect(error).to.toBeNull();
 	});
 
-	it("should create an issue", async () => {
+	it("should not create an issue", async () => {
 		const { data: issue_types, error: _ } = await supabase
 			.from("issue_types")
 			.select("*");
@@ -22,9 +21,16 @@ describe("suite name", () => {
 		const { data: issues, error } = await supabase
 			.from<IssueInsert>("issues")
 			.insert([{ issue_type_id: issue_types![0].id, gml_id: "gml_id" }]);
-		console.error(error);
-		expect(issues).to.toBeDefined();
-		expect(error).to.toBeNull();
+		expect(error).not.toBeNull();
+		expect(issues).toBeNull();
+		expect(error).toMatchInlineSnapshot(`
+			{
+			  "code": "42501",
+			  "details": null,
+			  "hint": null,
+			  "message": "new row violates row-level security policy for table \\"issues\\"",
+			}
+		`);
 	});
 
 	// it("snapshot", () => {
