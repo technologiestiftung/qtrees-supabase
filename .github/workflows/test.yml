@@ -27,7 +27,7 @@ jobs:
         run: npm ci
       - uses: supabase/setup-cli@v1
         with:
-          version: 1.0.3
+          version: 1.24.0
       - run: |
           supabase start
           npm run test:run
