@@ -44,13 +44,13 @@ Authorization: Bearer {{access_token}}
 
 ### invoke function get specific tree
 
-POST http://localhost:54321/functions/v1/trees?gml_id=eq.s_wfs_baumbestand_an.00008100:00283c82
+POST http://localhost:54321/functions/v1/trees?id=eq.s_wfs_baumbestand_an.00008100:00283c82
 Content-Type: application/json
 apikey: {{anon_key}}
 Authorization: Bearer {{access_token}}
 
 ### invoke function get join forcast
-POST http://localhost:54321/functions/v1/trees?limit=100&select=forecast(baum_id)
+POST http://localhost:54321/functions/v1/trees?limit=100&select=forecast(tree_id)
 Content-Type: application/json
 apikey: {{anon_key}}
 Authorization: Bearer {{access_token}}
