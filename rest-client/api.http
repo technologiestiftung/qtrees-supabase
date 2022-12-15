@@ -61,7 +61,7 @@ Authorization: Bearer {{access_token}}
 
 ### login
 
-GET {{ml_pgrest_host}}:{{ml_pgrest_port}}/rpc/login
+POST {{ml_pgrest_host}}:{{ml_pgrest_port}}/rpc/login
 Content-Type: application/json
 
 {"email": "{{ml_pgrest_user}}", "password": "{{ml_pgrest_password}}"}
@@ -70,7 +70,7 @@ Content-Type: application/json
 
 ### get all trees
 
-GET {{ml_pgrest_host}}:{{ml_pgrest_port}}/nowcast?limit=100
+POST {{ml_pgrest_host}}:{{ml_pgrest_port}}/nowcast?limit=100
 Content-Type: application/json
 Authorization: Bearer {{ml_pgrest_token}}
 
