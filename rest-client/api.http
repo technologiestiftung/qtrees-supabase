@@ -44,13 +44,13 @@ Authorization: Bearer {{access_token}}
 
 ### invoke function get specific tree
 
-POST http://localhost:54321/functions/v1/trees?gml_id=eq.s_wfs_baumbestand_an.00008100:00283c82
+POST http://localhost:54321/functions/v1/trees?id=eq.s_wfs_baumbestand_an.00008100:00283c82
 Content-Type: application/json
 apikey: {{anon_key}}
 Authorization: Bearer {{access_token}}
 
 ### invoke function get join forcast
-POST http://localhost:54321/functions/v1/trees?limit=100&select=forecast(baum_id)
+POST http://localhost:54321/functions/v1/trees?limit=100&select=forecast(tree_id)
 Content-Type: application/json
 apikey: {{anon_key}}
 Authorization: Bearer {{access_token}}
@@ -61,7 +61,7 @@ Authorization: Bearer {{access_token}}
 
 ### login
 
-GET {{ml_pgrest_host}}:{{ml_pgrest_port}}/rpc/login
+POST {{ml_pgrest_host}}:{{ml_pgrest_port}}/rpc/login
 Content-Type: application/json
 
 {"email": "{{ml_pgrest_user}}", "password": "{{ml_pgrest_password}}"}
@@ -70,7 +70,7 @@ Content-Type: application/json
 
 ### get all trees
 
-GET {{ml_pgrest_host}}:{{ml_pgrest_port}}/nowcast?limit=100
+POST {{ml_pgrest_host}}:{{ml_pgrest_port}}/nowcast?limit=100
 Content-Type: application/json
 Authorization: Bearer {{ml_pgrest_token}}
 
